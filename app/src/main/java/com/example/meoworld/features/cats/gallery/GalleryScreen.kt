@@ -64,7 +64,7 @@ fun BreedImagesScreen(
                         )
                     }
                 },
-                title = { Text("Images for breed") }
+                title = {  }
             )
 
             BoxWithConstraints(

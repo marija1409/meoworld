@@ -26,12 +26,10 @@ fun BestGlobalRank(
         InformationRow(
             title = "Rank: ",
             value = bestGlobalRank.first.toString(),
-            addUnderline = false
         )
         InformationRow(
             title = "Score: ",
             value = bestGlobalRank.second.toString(),
-            addUnderline = false
         )
     }
 }

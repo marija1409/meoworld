@@ -42,7 +42,6 @@ fun QuizHistorySegment(
     InformationRow(
         title = "Games played",
         value = quizResults.size.toString(),
-        addUnderline = false
     )
 
     Spacer(modifier = Modifier.height(16.dp))
