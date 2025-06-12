@@ -2,10 +2,9 @@ package com.example.meoworld.core.mappers
 
 import com.example.meoworld.data.api.models.CatsApiModel
 import com.example.meoworld.data.database.entities.BreedDbModel
-import com.example.meoworld.segments.cats.uiModel.CatUIModel
-import com.example.meoworld.segments.cats.uiModel.Weight
-import kotlinx.serialization.InternalSerializationApi
-import kotlin.String
+import com.example.meoworld.features.cats.uiModel.CatUIModel
+import com.example.meoworld.features.cats.uiModel.Weight
+
 fun CatsApiModel.asBreedDbModel(): BreedDbModel {
     return BreedDbModel(
         id = id,

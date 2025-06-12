@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.SubcomposeAsyncImage
-import com.example.meoworld.segments.cats.uiModel.ImageUiModel
+import com.example.meoworld.features.cats.uiModel.ImageUiModel
 
 @Composable
 fun ImagePreview(

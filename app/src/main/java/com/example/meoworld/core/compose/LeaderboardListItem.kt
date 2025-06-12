@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.meoworld.segments.leaderboard.uiModel.LeaderboardUIModel
+import com.example.meoworld.features.leaderboard.uiModel.LeaderboardUIModel
 
 @Composable
 fun LeaderboardListItem(model: LeaderboardUIModel, modifier: Modifier = Modifier) {

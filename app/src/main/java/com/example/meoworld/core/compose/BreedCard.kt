@@ -18,7 +18,7 @@ import coil3.compose.AsyncImage
 import kotlin.let
 import kotlin.text.isNotBlank
 import kotlin.text.take
-import com.example.meoworld.segments.cats.uiModel.CatUIModel
+import com.example.meoworld.features.cats.uiModel.CatUIModel
 
 @Composable
 fun BreedCard(

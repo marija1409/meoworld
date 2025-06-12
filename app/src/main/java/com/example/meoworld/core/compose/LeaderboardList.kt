@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.meoworld.segments.leaderboard.uiModel.LeaderboardUIModel
+import com.example.meoworld.features.leaderboard.uiModel.LeaderboardUIModel
 
 @Composable
 fun LeaderboardList(items: List<LeaderboardUIModel>, listState: androidx.compose.foundation.lazy.LazyListState) {

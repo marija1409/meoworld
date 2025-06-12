@@ -2,7 +2,7 @@ package com.example.meoworld.core.mappers
 
 import com.example.meoworld.data.api.models.LeaderboardApiModel
 import com.example.meoworld.data.database.entities.LBItemDbModel
-import com.example.meoworld.segments.leaderboard.uiModel.LeaderboardUIModel
+import com.example.meoworld.features.leaderboard.uiModel.LeaderboardUIModel
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)

@@ -2,7 +2,7 @@ package com.example.meoworld.core.mappers
 
 import com.example.meoworld.data.api.models.ImageApiModel
 import com.example.meoworld.data.database.entities.ImageDbModel
-import com.example.meoworld.segments.cats.uiModel.ImageUiModel
+import com.example.meoworld.features.cats.uiModel.ImageUiModel
 import kotlinx.serialization.InternalSerializationApi
 
 @OptIn(InternalSerializationApi::class)
