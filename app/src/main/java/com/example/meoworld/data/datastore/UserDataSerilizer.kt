@@ -9,11 +9,6 @@ import java.io.OutputStream
 
 class UserDataSerializer: Serializer<UserData> {
 
-    /** This is the user's account.
-     * There can be only 1 account.
-     * When the account is not created, the default value of empty Strings is used.
-     * Default value cannot be null due to the limitations of Kotlin Serialization.
-     */
     override val defaultValue: UserData = UserData()
 
     override suspend fun readFrom(input: InputStream): UserData {

@@ -12,6 +12,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.catapult.segments.quiz.start_screen.quizStartScreen
+import com.example.meoworld.features.cats.details.breedDetails
 import com.example.meoworld.navigation.bottomNav.BottomNavItem
 import com.example.meoworld.navigation.bottomNav.BottomNavigationBar
 import com.example.meoworld.features.cats.gallery.gallery
@@ -24,7 +25,6 @@ import com.example.meoworld.features.user.edit.profileEditScreen
 import com.example.meoworld.features.user.profile.profileScreen
 import com.example.meoworld.features.user.register.registerScreen
 import com.example.meoworld.features.welcome.welcomeScreen
-import com.example.meowpedia.cats.details.breedDetails
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -61,7 +61,6 @@ fun AppNavigation() {
                         navController = navController,
                         isQuizRunning = quizState.isQuizRunning,
                     )
-
                 }
         }
     ) { padding ->

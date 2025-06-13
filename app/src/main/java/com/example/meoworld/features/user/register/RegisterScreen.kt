@@ -33,7 +33,7 @@ fun NavGraphBuilder.registerScreen(
     LaunchedEffect(isRegistered) {
         if (isRegistered) {
             navController.navigate("breeds") {
-                popUpTo("register") { inclusive = true } // Removes register from back stack
+                popUpTo("register") { inclusive = true } 
             }
         }
     }

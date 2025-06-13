@@ -81,7 +81,6 @@ fun BreedGalleryScreenContent(
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column {
-            // TOP BAR
             TopAppBar(
                 title = {},
                 navigationIcon = {
@@ -94,7 +93,6 @@ fun BreedGalleryScreenContent(
                 }
             )
 
-            // CONTENT
             Box(modifier = Modifier.weight(1f)) {
                 if (state.images.isNotEmpty()) {
                     HorizontalPager(

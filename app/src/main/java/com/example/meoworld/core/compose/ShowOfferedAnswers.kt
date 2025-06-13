@@ -31,7 +31,7 @@ fun ShowOfferedAnswers(
     question: Question,
     selectedAnswer: String,
     onAnswerSelected: (String) -> Unit,
-    showCorrectAnswer: Boolean              // when true, show correct answer in green, wrong answers in red
+    showCorrectAnswer: Boolean
 ) {
     val correctAnswer = question.correctAnswer
 

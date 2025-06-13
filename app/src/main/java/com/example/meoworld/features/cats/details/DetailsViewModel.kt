@@ -1,16 +1,16 @@
-package com.example.meowpedia.cats.details
+package com.example.meoworld.features.cats.details
 
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meoworld.core.mappers.asBreedUiModel
+import com.example.meoworld.features.cats.details.Details.DetailsUiState
 import com.example.meoworld.features.cats.repo.CatsRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.example.meowpedia.cats.details.Details.DetailsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject

@@ -90,7 +90,7 @@ fun ShowQuestionScreen(
 ) {
     val question = state.questions[state.currentQuestionIndex]
     var answer by rememberSaveable { mutableStateOf("") }
-    var showCancelDialog by remember { mutableStateOf(false) }
+    var showCancelDialog by rememberSaveable { mutableStateOf(false) }
     var isQuestionVisible by remember { mutableStateOf(false) }
 
     if (state.showCorrectAnswer) {

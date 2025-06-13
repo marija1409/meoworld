@@ -88,7 +88,7 @@ fun ProfileScreen(
                                     onClick = {
                                         profileViewModel.logout {
                                             navController.navigate("register") {
-                                                popUpTo(0) { inclusive = true } // clears back stack
+                                                popUpTo(0) { inclusive = true }
                                             }
                                         }
                                     },

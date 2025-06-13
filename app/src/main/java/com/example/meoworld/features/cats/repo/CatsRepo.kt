@@ -21,7 +21,6 @@ class CatsRepo @Inject constructor(
         val breedDbModels = breeds.map { it.asBreedDbModel() }
         database.breedDao().insertAll(breedDbModels)
 
-        // For each breed, fetch images immediately
         breedDbModels.forEach { breed ->
             val imageCount = database.imageDao().countImagesForBreed(breed.id)
             if (imageCount == 0) {

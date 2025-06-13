@@ -27,7 +27,7 @@ abstract class AppDatabase: RoomDatabase() {
 
     abstract fun imageDao(): ImageDao
 
-    abstract fun resultDao(): ResultDao     // locally stored results of user on this device
+    abstract fun resultDao(): ResultDao
 
-    abstract fun leaderboardDao(): LBItemDao    // globally stored results of all users
+    abstract fun leaderboardDao(): LBItemDao
 }

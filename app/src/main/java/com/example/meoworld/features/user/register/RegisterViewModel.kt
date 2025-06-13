@@ -36,7 +36,7 @@ class RegisterViewModel @Inject constructor(
                 when (it) {
                     is RegisterEvent.Register -> {
                         repository.registerUser(it.asUserData())
-                        _isRegistered.emit(true) // Emit registration success
+                        _isRegistered.emit(true)
                     }
                 }
             }

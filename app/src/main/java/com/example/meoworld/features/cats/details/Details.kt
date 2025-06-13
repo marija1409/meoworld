@@ -1,4 +1,4 @@
-package com.example.meowpedia.cats.details
+package com.example.meoworld.features.cats.details
 
 import com.example.meoworld.features.cats.uiModel.CatUIModel
 

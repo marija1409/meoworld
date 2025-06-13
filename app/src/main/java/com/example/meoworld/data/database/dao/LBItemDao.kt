@@ -22,9 +22,6 @@ interface LBItemDao {
     @Query("SELECT * FROM Leaderboard ORDER BY result DESC LIMIT 10")
     suspend fun getTop10(): List<LBItemDbModel>
 
-    /**
-     * Returns a pair: (rank, result)
-     */
     suspend fun getBestGlobalRank(nickname: String): Pair<Int, Double> {
         val allResults = getAll()
         val userResult = allResults.find { it.nickname == nickname }

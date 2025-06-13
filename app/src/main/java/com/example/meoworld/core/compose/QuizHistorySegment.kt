@@ -59,10 +59,9 @@ fun QuizHistoryTable(
     maxVisibleRows: Int
 ) {
     val borderWidth = 1.dp
-    val headerBackgroundColor = Color(0xFFA2A2BD)
 
-    val rowHeightDp = 42.dp  // Approximate height per data row (including padding)
-    val headerHeightDp = 48.dp // Approximate height for header row
+    val rowHeightDp = 42.dp
+    val headerHeightDp = 48.dp
 
     val maxHeight = headerHeightDp + (rowHeightDp * maxVisibleRows)
 
@@ -80,8 +79,7 @@ fun QuizHistoryTable(
     ) {
         QuizHistoryTableContent(
             quizResults = quizResults,
-            borderWidth = borderWidth,
-            headerBackgroundColor = headerBackgroundColor
+            borderWidth = borderWidth
         )
     }
 }
@@ -91,7 +89,6 @@ fun QuizHistoryTable(
 fun QuizHistoryTableContent(
     quizResults: List<ResultDbModel>,
     borderWidth: Dp,
-    headerBackgroundColor: Color
 ) {
     Column(
         modifier = Modifier

@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object UserStoreModule {
 
-    @Provides           // tells Dagger how to provide instances of a type
+    @Provides
     @Singleton
     fun provideAuthDataStore(@ApplicationContext context: Context): DataStore<UserData> =
         DataStoreFactory.create(

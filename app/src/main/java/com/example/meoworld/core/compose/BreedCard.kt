@@ -77,7 +77,6 @@ fun BreedCard(
             )
 
             if (breed.temperaments.isNotBlank()) {
-                // You can call your TemperamentChips here if you want:
                 TemperamentChips(
                     temperamentString = breed.temperaments,
                     maxTemperaments = 3,

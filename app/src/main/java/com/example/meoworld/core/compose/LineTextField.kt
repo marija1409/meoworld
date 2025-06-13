@@ -53,7 +53,7 @@ fun LineTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 4.dp)
-                .height(24.dp) // Adjust the height as needed
+                .height(24.dp)
         )
 
         Divider(color = Color.Gray, thickness = 1.dp)
