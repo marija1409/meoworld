@@ -4,6 +4,11 @@ import com.example.meoworld.data.datastore.UserData
 import kotlinx.serialization.InternalSerializationApi
 
 interface Register {
+    data class RegisterState(
+        val isRegister: Boolean = false,
+        val error: RegistrationError? = null,
+    )
+
     sealed class RegisterEvent {
         @OptIn(InternalSerializationApi::class)
         data class Register(
@@ -21,5 +26,9 @@ interface Register {
                 )
             }
         }
+    }
+
+    sealed class RegistrationError {
+        data class RegistrationFailed(val cause: Throwable? = null) : RegistrationError()
     }
 }

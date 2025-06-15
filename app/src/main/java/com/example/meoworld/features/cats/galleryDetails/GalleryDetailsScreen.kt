@@ -20,8 +20,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.example.meoworld.core.compose.ErrorMessage
 import com.example.meoworld.core.compose.ImagePreview
 import com.example.meoworld.core.compose.LoadingIndicator
+import com.example.meoworld.features.cats.gallery.GalleryState
 import com.example.meoworld.features.cats.galleryDetails.GalleryDetails.BreedGalleryState
 
 
@@ -50,14 +52,25 @@ fun BreedGalleryScreen(
     state: BreedGalleryState,
     onBack: () -> Unit,
 ) {
-    if(state.loading)
-        LoadingIndicator()
-    else {
-        BreedGalleryScreenContent(
-            state = state,
-            onBack = onBack,
-        )
+    when{
+        state.loading ->{
+            LoadingIndicator()
+        }
+        state.error != null ->{
+            val errorMessage = when (state.error) {
+                is GalleryDetails.GalleryDetailsError.GalleryFailed ->
+                    "Failed to load. Error message: ${state.error.cause?.message}."
+            }
+            ErrorMessage(errorMessage)
+        }
+        else -> {
+            BreedGalleryScreenContent(
+                state = state,
+                onBack = onBack,
+            )
+        }
     }
+
 }
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
@@ -75,9 +88,6 @@ fun BreedGalleryScreenContent(
             pagerState.scrollToPage(state.currentIndex)
         }
     }
-
-    Log.d("CATAPULT", "state.CurrentIndex: ${state.currentIndex}")
-    Log.d("CATAPULT", "pageCount: ${pagerState.pageCount} currentIndex: ${pagerState.currentPage}")
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column {

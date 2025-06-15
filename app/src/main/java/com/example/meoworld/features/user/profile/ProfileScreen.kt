@@ -34,7 +34,6 @@ fun NavGraphBuilder.profileScreen(
 
     ProfileScreen(
         state = state,
-        onEditClick = { navController.navigate("profile/edit") },
         navController = navController,
         profileViewModel = profileViewModel
     )
@@ -44,7 +43,6 @@ fun NavGraphBuilder.profileScreen(
 @Composable
 fun ProfileScreen(
     state: ProfileState,
-    onEditClick: () -> Unit,
     navController: NavController,
     profileViewModel: ProfileViewModel,
 ) {
@@ -92,19 +90,13 @@ fun ProfileScreen(
                                             }
                                         }
                                     },
-                                    modifier = Modifier.padding(top = 16.dp),
+                                    modifier = Modifier.padding(top = 16.dp)
+                                        .width(100.dp),
                                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
                                 ) {
                                     Text("Logout", color = Color.White)
                                 }
 
-                                Button(
-                                    onClick = onEditClick,
-                                    modifier = Modifier.padding(top = 16.dp),
-                                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
-                                ) {
-                                    Text("Edit Profile", color = Color.White)
-                                }
                             }
 
                         }

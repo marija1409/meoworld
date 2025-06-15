@@ -58,7 +58,7 @@ class QuizQuestionViewModel @Inject constructor(
                         val currIndex = state.value.currentQuestionIndex
                         val questions = state.value.questions
 
-                        setState { copy(showCorrectAnswer = true) }
+                        setState { copy(showCorrectAnswer = true, error = null) }
                         delay(1000)
                         setState { copy(showCorrectAnswer = false) }
 
@@ -75,7 +75,7 @@ class QuizQuestionViewModel @Inject constructor(
                                 endQuiz()
                             }
                         } catch (e: Exception) {
-                            Log.e("CATAPULT", "Error transitioning question: ${e.message}", e)
+                            Log.e("QUIZ", "Error transitioning question: ${e.message}", e)
                             setState { copy(error = QuizQuestionState.QuizError.QuizFailed(e)) }
                         }
                     }
@@ -87,7 +87,7 @@ class QuizQuestionViewModel @Inject constructor(
                             try {
                                 lbRepository.submitQuizResult(result = event.score)
                             } catch (e: Exception) {
-                                Log.e("CATAPULT", "Failed to submit result: ${e.message}", e)
+                                Log.e("QUIZ", "Failed to submit result: ${e.message}", e)
                                 setState { copy(error = QuizQuestionState.QuizError.QuizFailed(e)) }
                             }
                         }
@@ -113,7 +113,7 @@ class QuizQuestionViewModel @Inject constructor(
                 timer.start()
 
             } catch (e: Exception) {
-                Log.e("CATAPULT", "Failed to create quiz: ${e.message}", e)
+                Log.e("QUIZ", "Failed to create quiz: ${e.message}", e)
                 setState { copy(creatingQuestions = false, error = QuizQuestionState.QuizError.QuizFailed(e)) }
             }
         }
@@ -131,12 +131,12 @@ class QuizQuestionViewModel @Inject constructor(
             try {
                 quizRepository.submitResultToDatabase(score)
             } catch (e: Exception) {
-                Log.e("CATAPULT", "Failed to save result to DB: ${e.message}", e)
+                Log.e("QUIZ", "Failed to save result to DB: ${e.message}", e)
                 setState { copy(error = QuizQuestionState.QuizError.QuizFailed(e)) }
             }
 
         } catch (e: Exception) {
-            Log.e("CATAPULT", "Error ending quiz: ${e.message}", e)
+            Log.e("QUIZ", "Error ending quiz: ${e.message}", e)
             setState { copy(error = QuizQuestionState.QuizError.QuizFailed(e)) }
         }
     }
@@ -148,7 +148,7 @@ class QuizQuestionViewModel @Inject constructor(
             val remainingTime = state.value.timeLeft.toInt()
             (correct * 2.5 * (1 + (remainingTime + 120) / totalDuration)).coerceAtMost(100.0)
         } catch (e: Exception) {
-            Log.e("CATAPULT", "Score calculation failed: ${e.message}", e)
+            Log.e("QUIZ", "Score calculation failed: ${e.message}", e)
             0.0
         }
     }

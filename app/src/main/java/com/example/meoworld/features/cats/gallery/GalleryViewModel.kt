@@ -19,7 +19,7 @@ class GalleryViewModel @Inject constructor (
     private val repository: CatsRepo
 ): ViewModel() {
 
-    private val breedId = savedStateHandle.get<String>("breedId")!!
+    private val breedId = savedStateHandle.get<String>("breedId") ?: ""
 
     private val _state = MutableStateFlow(GalleryState(breedId = breedId))
     val state = _state.asStateFlow()
@@ -31,14 +31,20 @@ class GalleryViewModel @Inject constructor (
     }
 
     private fun observeImages() {
+        setState { copy(fetching = true) }
         viewModelScope.launch {
-            repository.observeImagesForBreed(breedId)
-                .distinctUntilChanged()
-                .collect {
-                    setState { copy(images = it.map { it.asImageUiModel() }) }
-                }
+            try {
+                repository.observeImagesForBreed(breedId)
+                    .distinctUntilChanged()
+                    .collect {
+                        setState { copy(images = it.map { it.asImageUiModel() }) }
+                    }
+            } catch (e: Exception) {
+                setState { copy(error = GalleryState.GalleryError.GalleryFailed(e)) }
+            }
         }
     }
+
 
 
 }

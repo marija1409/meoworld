@@ -48,7 +48,6 @@ class LeaderboardViewModel @Inject constructor(
             } finally {
                 setState { copy(fetching = false) }
             }
-            setState { copy(fetching = false) }
         }
     }
 }

@@ -19,6 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.SubcomposeAsyncImage
+import com.example.meoworld.core.compose.ErrorMessage
+import com.example.meoworld.core.compose.NoDataContent
+import com.example.meoworld.features.cats.details.Details.DetailsUiState
 import com.example.meoworld.features.cats.uiModel.ImageUiModel
 
 fun NavGraphBuilder.gallery(
@@ -69,42 +72,63 @@ fun BreedImagesScreen(
 
             BoxWithConstraints(
                 modifier = Modifier.weight(1f),
-                contentAlignment = Alignment.BottomCenter,
+                contentAlignment = Alignment.Center,
             ) {
-                val screenWidth = this.maxWidth
-                val cellSize = (screenWidth / 2) - 4.dp
+                when {
+                    state.fetching -> {
+                        CircularProgressIndicator()
+                    }
 
-                LazyVerticalStaggeredGrid(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 4.dp),
-                    columns = StaggeredGridCells.Fixed(2),
-                    contentPadding = PaddingValues(),
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
-                    itemsIndexed(
-                        items = state.images,
-                        key = { index: Int, image: ImageUiModel -> image.id },
-                    ) { index: Int, image: ImageUiModel ->
-                        val aspectRatio = image.width.toFloat() / image.height.toFloat()
-                        val imageHeightDp = cellSize / aspectRatio
+                    state.error != null -> {
+                        val errorMessage = when (state.error) {
+                            is GalleryState.GalleryError.GalleryFailed ->
+                                "Failed to load. Error message: ${state.error.cause?.message}."
+                        }
+                        ErrorMessage(errorMessage)
+                    }
 
-                        Card(
+                    state.images.isEmpty() -> {
+                        NoDataContent("There is no images for this breed")
+                    }
+
+                    else -> {
+                        val screenWidth = this.maxWidth
+                        val cellSize = (screenWidth / 2) - 4.dp
+
+                        LazyVerticalStaggeredGrid(
                             modifier = Modifier
-                                .width(cellSize)
-                                .height(imageHeightDp)
-                                .clickable { onImageClick(image.id) },
+                                .fillMaxSize()
+                                .padding(horizontal = 4.dp),
+                            columns = StaggeredGridCells.Fixed(2),
+                            contentPadding = PaddingValues(),
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
                         ) {
-                            SubcomposeAsyncImage(
-                                modifier = Modifier.fillMaxSize(),
-                                model = image.url,
-                                contentDescription = null,
-                                loading = { CircularProgressIndicator() }
-                            )
+                            itemsIndexed(
+                                items = state.images,
+                                key = { _: Int, image: ImageUiModel -> image.id },
+                            ) { _, image ->
+                                val aspectRatio = image.width.toFloat() / image.height.toFloat()
+                                val imageHeightDp = cellSize / aspectRatio
+
+                                Card(
+                                    modifier = Modifier
+                                        .width(cellSize)
+                                        .height(imageHeightDp)
+                                        .clickable { onImageClick(image.id) },
+                                ) {
+                                    SubcomposeAsyncImage(
+                                        modifier = Modifier.fillMaxSize(),
+                                        model = image.url,
+                                        contentDescription = null,
+                                        loading = { CircularProgressIndicator() }
+                                    )
+                                }
+                            }
                         }
                     }
                 }
             }
+
         }
     }
 

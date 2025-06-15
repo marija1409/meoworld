@@ -21,7 +21,6 @@ import com.example.meoworld.features.cats.list.cats
 import com.example.meoworld.features.leaderboard.screen.leaderboardScreen
 import com.example.meoworld.features.quiz.question_screen.QuizQuestionViewModel
 import com.example.meoworld.features.quiz.question_screen.quizQuestionScreen
-import com.example.meoworld.features.user.edit.profileEditScreen
 import com.example.meoworld.features.user.profile.profileScreen
 import com.example.meoworld.features.user.register.registerScreen
 import com.example.meoworld.features.welcome.welcomeScreen
@@ -139,11 +138,6 @@ fun AppNavigation() {
 
         profileScreen(
             route = "profile",
-            navController = navController,
-        )
-
-        profileEditScreen(
-            route = "profile/edit",
             navController = navController,
         )
         }

@@ -9,5 +9,10 @@ interface GalleryDetails {
         val loading: Boolean = true,
         val images: List<ImageUiModel> = emptyList(),
         val currentIndex: Int = 0,
+        val error: GalleryDetailsError? = null
     )
+
+    sealed class GalleryDetailsError {
+        data class GalleryFailed(val cause: Throwable? = null) : GalleryDetailsError()
+    }
 }
