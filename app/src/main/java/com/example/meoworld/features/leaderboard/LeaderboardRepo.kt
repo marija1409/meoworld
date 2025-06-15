@@ -1,5 +1,6 @@
 package com.example.meoworld.features.leaderboard
 
+import com.example.meoworld.core.mappers.asLBItemDbModel
 import com.example.meoworld.data.api.LeaderboardApi
 import com.example.meoworld.data.api.models.LeaderboardApiModel
 import com.example.meoworld.data.api.models.SubmitResultRequest
@@ -50,24 +51,3 @@ class LeaderboardRepo @Inject constructor(
     }
 }
 
-fun LeaderboardApiModel.asLBItemDbModel(
-    allResults: List<LeaderboardApiModel>
-): LBItemDbModel {
-
-    val totalGamesPlayed = allResults.count { it.nickname == this.nickname }
-
-    return LBItemDbModel(
-        nickname = nickname,
-        result = result,
-        totalGamesPlayed = totalGamesPlayed,
-        createdAt = createdAt
-    )
-}
-
-fun LBItemDbModel.asLBItemUiModel(): LeaderboardUIModel {
-    return LeaderboardUIModel(
-        nickname = nickname,
-        result = result,
-        totalGamesPlayed = totalGamesPlayed,
-    )
-}

@@ -20,6 +20,7 @@ import androidx.navigation.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.SubcomposeAsyncImage
 import com.example.meoworld.core.compose.ErrorMessage
+import com.example.meoworld.core.compose.LoadingIndicator
 import com.example.meoworld.core.compose.NoDataContent
 import com.example.meoworld.features.cats.details.Details.DetailsUiState
 import com.example.meoworld.features.cats.uiModel.ImageUiModel
@@ -76,7 +77,7 @@ fun BreedImagesScreen(
             ) {
                 when {
                     state.fetching -> {
-                        CircularProgressIndicator()
+                        LoadingIndicator()
                     }
 
                     state.error != null -> {
@@ -120,7 +121,7 @@ fun BreedImagesScreen(
                                         modifier = Modifier.fillMaxSize(),
                                         model = image.url,
                                         contentDescription = null,
-                                        loading = { CircularProgressIndicator() }
+                                        loading = { LoadingIndicator() }
                                     )
                                 }
                             }

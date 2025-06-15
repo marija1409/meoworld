@@ -46,7 +46,6 @@ class CatListViewModel @Inject constructor(
                     is CatList.CatListUIEvent.SearchQueryChanged -> {
                         filterBreedList(query = it.query)
                     }
-
                 }
             }
         }

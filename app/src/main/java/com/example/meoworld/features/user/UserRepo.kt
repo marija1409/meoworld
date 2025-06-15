@@ -37,7 +37,6 @@ class UserRepo @Inject constructor(
         store.setData(userData)
     }
 
-
     suspend fun clearUserData() {
         store.deleteUser()
     }

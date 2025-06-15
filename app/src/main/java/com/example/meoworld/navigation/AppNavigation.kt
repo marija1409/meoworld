@@ -1,6 +1,12 @@
 package com.example.meoworld.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
@@ -67,6 +73,8 @@ fun AppNavigation() {
             navController = navController,
             startDestination = startDestination,
             modifier = Modifier.padding(padding),
+            enterTransition = { scaleIn(initialScale = 0.8f, animationSpec = tween(300)) },
+            exitTransition = { scaleOut(targetScale = 0.8f, animationSpec = tween(300)) }
         ) {
 
             welcomeScreen(

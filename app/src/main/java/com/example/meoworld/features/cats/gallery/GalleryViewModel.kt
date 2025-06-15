@@ -37,7 +37,7 @@ class GalleryViewModel @Inject constructor (
                 repository.observeImagesForBreed(breedId)
                     .distinctUntilChanged()
                     .collect {
-                        setState { copy(images = it.map { it.asImageUiModel() }) }
+                        setState { copy(images = it.map { it.asImageUiModel() }, fetching = false) }
                     }
             } catch (e: Exception) {
                 setState { copy(error = GalleryState.GalleryError.GalleryFailed(e)) }

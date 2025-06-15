@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.compose.SubcomposeAsyncImage
 import kotlin.let
 import kotlin.text.isNotBlank
 import kotlin.text.take
@@ -38,7 +39,7 @@ fun BreedCard(
         Column(modifier = Modifier.padding(16.dp)) {
 
             breed.image.takeIf { it.isNotEmpty() }?.let { imageUrl ->
-                AsyncImage(
+                SubcomposeAsyncImage(
                     model = imageUrl,
                     contentDescription = "${breed.name} image",
                     modifier = Modifier
@@ -48,7 +49,8 @@ fun BreedCard(
                             2.dp,
                             MaterialTheme.colorScheme.secondary,
                             RoundedCornerShape(12.dp)
-                        )
+                        ),
+                    loading = {LoadingIndicator()}
                 )
             }
 

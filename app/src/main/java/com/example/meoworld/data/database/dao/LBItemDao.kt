@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface LBItemDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(list: List<LBItemDbModel>)
+    suspend fun insertAll(list: List<LBItemDbModel>)
 
     @Query("SELECT * FROM Leaderboard ORDER BY result DESC")
     suspend fun getAll(): List<LBItemDbModel>

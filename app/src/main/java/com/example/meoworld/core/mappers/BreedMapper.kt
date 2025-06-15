@@ -17,7 +17,6 @@ fun CatsApiModel.asBreedDbModel(): BreedDbModel {
         weightImperial = weight?.imperial ?: "",
         weightMetric = weight?.metric ?: "",
 
-        // traits
         adaptability = adaptability ?: 0,
         affectionLevel = affection_level ?: 0,
         childFriendly = child_friendly ?: 0,

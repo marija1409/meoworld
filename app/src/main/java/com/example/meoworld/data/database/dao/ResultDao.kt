@@ -11,7 +11,7 @@ import com.example.meoworld.data.database.entities.ResultDbModel
 interface ResultDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(result: ResultDbModel)
+    suspend fun insert(result: ResultDbModel)
 
     @Query("SELECT * FROM Results ORDER BY createdAt DESC")
     suspend fun getAll(): List<ResultDbModel>

@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 interface BreedDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(breedDbModel: BreedDbModel)
+    suspend fun insert(breedDbModel: BreedDbModel)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(list: List<BreedDbModel>)
+    suspend fun insertAll(list: List<BreedDbModel>)
 
     @Query("SELECT * FROM Breeds")
     suspend fun getAll(): List<BreedDbModel>

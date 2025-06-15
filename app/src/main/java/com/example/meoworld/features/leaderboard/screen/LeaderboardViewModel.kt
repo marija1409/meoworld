@@ -3,8 +3,8 @@ package com.example.meoworld.features.leaderboard.screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.meoworld.core.mappers.asLBItemUiModel
 import com.example.meoworld.features.leaderboard.LeaderboardRepo
-import com.example.meoworld.features.leaderboard.asLBItemUiModel
 import com.example.meoworld.features.leaderboard.screen.Leaderboard.LeaderboardState
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
@@ -33,7 +33,8 @@ class LeaderboardViewModel @Inject constructor(
             repository.observeLeaderboard().collect {
                 setState { copy(
                     leaderboardItems = it.map { it.asLBItemUiModel() }
-                ) }
+                )
+                }
             }
         }
     }

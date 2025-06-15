@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 interface ImageDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(imageDbModel: ImageDbModel)
+    suspend fun insert(imageDbModel: ImageDbModel)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(list: List<ImageDbModel>)
+    suspend fun insertAll(list: List<ImageDbModel>)
 
     @Query("SELECT * FROM Images WHERE breedId = :breedId")
     suspend fun getAllForBreed(breedId: String): List<ImageDbModel>
