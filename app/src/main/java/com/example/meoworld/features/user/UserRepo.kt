@@ -18,8 +18,6 @@ class UserRepo @Inject constructor(
     @OptIn(InternalSerializationApi::class)
     suspend fun getUserData() = store.getUserData()
 
-    suspend fun getAllResults() = database.resultDao().getAll()
-
     @OptIn(InternalSerializationApi::class)
     suspend fun getBestGlobalRank(): Pair<Int, Double> {
         if (database.leaderboardDao().getAll().isEmpty())
@@ -30,10 +28,6 @@ class UserRepo @Inject constructor(
 
     suspend fun registerUser(userData: UserData) {
         Log.d("USER REPO", "User repository - registering user: $userData")
-        store.setData(userData)
-    }
-
-    suspend fun updateUser(userData: UserData) {
         store.setData(userData)
     }
 

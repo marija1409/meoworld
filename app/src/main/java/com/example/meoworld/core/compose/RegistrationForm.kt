@@ -19,20 +19,18 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun RegistrationForm(
-    firstName: TextFieldValue,
-    onFirstNameChange: (TextFieldValue) -> Unit,
-    lastName: TextFieldValue,
-    onLastNameChange: (TextFieldValue) -> Unit,
-    nickname: TextFieldValue,
-    onNicknameChange: (TextFieldValue) -> Unit,
-    email: TextFieldValue,
-    onEmailChange: (TextFieldValue) -> Unit,
-
+    firstName: String,
+    onFirstNameChange: (String) -> Unit,
+    lastName: String,
+    onLastNameChange: (String) -> Unit,
+    nickname: String,
+    onNicknameChange: (String) -> Unit,
+    email: String,
+    onEmailChange: (String) -> Unit,
     buttonText: String,
     onClick: () -> Unit,
     paddingValues: PaddingValues
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -40,34 +38,32 @@ fun RegistrationForm(
             .padding(horizontal = 42.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
+        Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
 
             LineTextField(
                 value = firstName,
-                onValueChange = onFirstNameChange,
+                onValueChange = { onFirstNameChange(it) },
                 label = "First Name",
-                regex = Regex("^[a-zA-Z]*$") // only letters
+                regex = Regex("^[a-zA-Z]*$")
             )
 
             LineTextField(
                 value = lastName,
-                onValueChange = onLastNameChange,
+                onValueChange = { onLastNameChange(it) },
                 label = "Last Name",
-                regex = Regex("^[a-zA-Z]*$") // only letters
+                regex = Regex("^[a-zA-Z]*$")
             )
 
             LineTextField(
                 value = nickname,
-                onValueChange = onNicknameChange,
+                onValueChange = { onNicknameChange(it) },
                 label = "Nickname",
-                regex = Regex("^[a-zA-Z0-9_]*$") // only letters, numbers, and underscores
+                regex = Regex("^[a-zA-Z0-9_]*$")
             )
 
             LineTextField(
                 value = email,
-                onValueChange = onEmailChange,
+                onValueChange = { onEmailChange(it) },
                 label = "Email",
                 regex = Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
             )
@@ -79,10 +75,9 @@ fun RegistrationForm(
                     .padding(bottom = 16.dp)
                     .align(Alignment.End),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
-            ) { Text(text = buttonText, color = Color.White) }
+            ) {
+                Text(text = buttonText, color = Color.White)
+            }
         }
     }
-
 }
-
-

@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun LineTextField(
-    value: TextFieldValue,
-    onValueChange: (TextFieldValue) -> Unit,
+    value: String,
+    onValueChange: (String) -> Unit,
     label: String,
     regex: Regex,
 ) {
@@ -44,7 +44,7 @@ fun LineTextField(
             value = value,
             onValueChange = {
                 onValueChange(it)
-                isError = !regex.matches(it.text)
+                isError = !regex.matches(it)
             },
             textStyle = TextStyle(
                 fontSize = 18.sp,

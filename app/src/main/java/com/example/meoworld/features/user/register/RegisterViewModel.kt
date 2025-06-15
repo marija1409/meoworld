@@ -40,18 +40,29 @@ class RegisterViewModel @Inject constructor(
         viewModelScope.launch {
             events.collect { event ->
                 when (event) {
+                    is RegisterEvent.UpdateFirstName -> setState { copy(firstName = event.value) }
+                    is RegisterEvent.UpdateLastName -> setState { copy(lastName = event.value) }
+                    is RegisterEvent.UpdateNickname -> setState { copy(nickname = event.value) }
+                    is RegisterEvent.UpdateEmail -> setState { copy(email = event.value) }
+
                     is RegisterEvent.Register -> {
                         setState { copy(isRegister = false, error = null) }
                         try {
                             repository.registerUser(event.asUserData())
                             setState { copy(isRegister = true, error = null) }
                         } catch (e: Throwable) {
-                            setState { copy(isRegister = false, error = Register.RegistrationError.RegistrationFailed(e)) }
+                            setState {
+                                copy(
+                                    isRegister = false,
+                                    error = Register.RegistrationError.RegistrationFailed(e)
+                                )
+                            }
                         }
                     }
                 }
             }
         }
     }
+
 
 }
