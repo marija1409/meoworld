@@ -19,9 +19,6 @@ interface LBItemDao {
     @Query("SELECT * FROM Leaderboard ORDER BY result DESC")
     fun observeAll(): Flow<List<LBItemDbModel>>
 
-    @Query("SELECT * FROM Leaderboard ORDER BY result DESC LIMIT 10")
-    suspend fun getTop10(): List<LBItemDbModel>
-
     suspend fun getBestGlobalRank(nickname: String): Pair<Int, Double> {
         val allResults = getAll()
         val userResult = allResults.find { it.nickname == nickname }

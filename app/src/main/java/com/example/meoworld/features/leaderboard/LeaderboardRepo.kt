@@ -23,7 +23,6 @@ class LeaderboardRepo @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 val lbItems = leaderboardApi.getLeaderboard(categoryId)
-                database.leaderboardDao().deleteAll()
                 database.leaderboardDao().insertAll(lbItems.map { it.asLBItemDbModel(lbItems) })
             }catch (e: IOException){
                 Log.e("LEADERBOARD REPO", "Fetching from API failed")
