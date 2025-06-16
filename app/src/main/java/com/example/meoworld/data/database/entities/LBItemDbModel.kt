@@ -4,7 +4,7 @@ import androidx.room.Entity
 
 @Entity(
     tableName = "leaderboard",
-    primaryKeys = ["nickname", "result", "createdAt"]
+    primaryKeys = ["nickname", "createdAt"]
 )
 data class LBItemDbModel (
     val nickname: String,

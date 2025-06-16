@@ -18,7 +18,7 @@ import com.example.meoworld.data.database.entities.ResultDbModel
         ResultDbModel :: class,
         LBItemDbModel :: class
     ],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 abstract class AppDatabase: RoomDatabase() {

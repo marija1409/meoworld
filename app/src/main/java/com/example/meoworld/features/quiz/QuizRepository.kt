@@ -7,6 +7,8 @@ import com.example.meoworld.data.database.entities.ResultDbModel
 import com.example.meoworld.data.datastore.UserStore
 import com.example.meoworld.features.quiz.Quiz.Question
 import kotlinx.coroutines.*
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -18,23 +20,31 @@ class QuizRepository @Inject constructor(
 
     private var temperaments: List<String> = emptyList()
 
+
+
     suspend fun generateQuestions(): List<Question> = coroutineScope {
         val usedImageUrls = mutableSetOf<String>()
+        val imageMutex = Mutex()
+
         val questions = mutableListOf<Deferred<Question>>()
         repeat(20) {
             questions += async(Dispatchers.IO) {
                 when (Random.nextInt(2)) {
-                    0 -> generateTypeOne(usedImageUrls)
-                    else -> generateTypeTwo(usedImageUrls)
+                    0 -> generateTypeOne(usedImageUrls, imageMutex)
+                    else -> generateTypeTwo(usedImageUrls, imageMutex)
                 }
             }
         }
         questions.awaitAll()
     }
 
-    private suspend fun generateTypeOne(usedImageUrls: MutableSet<String>): Question {
+
+    private suspend fun generateTypeOne(
+        usedImageUrls: MutableSet<String>,
+        imageMutex: Mutex
+    ): Question {
         val breed = getBreedsWithImages().random()
-        val imageUrl = getUniqueImageForBreed(breed.id, usedImageUrls)
+        val imageUrl = getUniqueImageForBreed(breed.id, usedImageUrls, imageMutex)
 
         val allBreeds = database.breedDao().getAll()
         val answers = allBreeds
@@ -52,9 +62,13 @@ class QuizRepository @Inject constructor(
         )
     }
 
-    private suspend fun generateTypeTwo(usedImageUrls: MutableSet<String>): Question {
+
+    private suspend fun generateTypeTwo(
+        usedImageUrls: MutableSet<String>,
+        imageMutex: Mutex
+    ): Question {
         val breed = getBreedsWithImages().random()
-        val imageUrl = getUniqueImageForBreed(breed.id, usedImageUrls)
+        val imageUrl = getUniqueImageForBreed(breed.id, usedImageUrls, imageMutex)
 
         val breedTemperaments = breed.temperament.split(",").map { it.trim().lowercase() }
         val allTemperaments = fetchTemperaments().map { it.trim().lowercase() }
@@ -73,16 +87,22 @@ class QuizRepository @Inject constructor(
         )
     }
 
+
     private suspend fun getUniqueImageForBreed(
         breedId: String,
-        usedImages: MutableSet<String>
+        usedImages: MutableSet<String>,
+        mutex: Mutex
     ): String {
         val images = database.imageDao().getAllForBreed(breedId)
-        val availableImages = images.filter { it.url !in usedImages }
-        val chosen = availableImages.randomOrNull() ?: images.random() // fallback to duplicate if all used
-        usedImages += chosen.url
-        return chosen.url
+
+        return mutex.withLock {
+            val availableImages = images.filter { it.url !in usedImages }
+            val chosen = availableImages.randomOrNull() ?: images.random()
+            usedImages += chosen.url
+            chosen.url
+        }
     }
+
 
 
     private suspend fun fetchTemperaments(): List<String> {

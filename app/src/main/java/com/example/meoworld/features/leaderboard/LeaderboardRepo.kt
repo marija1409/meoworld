@@ -1,16 +1,16 @@
 package com.example.meoworld.features.leaderboard
 
+import android.util.Log
 import com.example.meoworld.core.mappers.asLBItemDbModel
 import com.example.meoworld.data.api.LeaderboardApi
-import com.example.meoworld.data.api.models.LeaderboardApiModel
 import com.example.meoworld.data.api.models.SubmitResultRequest
 import com.example.meoworld.data.database.AppDatabase
 import com.example.meoworld.data.database.entities.LBItemDbModel
 import com.example.meoworld.data.datastore.UserStore
-import com.example.meoworld.features.leaderboard.uiModel.LeaderboardUIModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import javax.inject.Inject
 
 class LeaderboardRepo @Inject constructor(
@@ -21,9 +21,14 @@ class LeaderboardRepo @Inject constructor(
 
     suspend fun fetchLeaderboard(categoryId: Int = 1) {
         withContext(Dispatchers.IO) {
-            val lbItems = leaderboardApi.getLeaderboard(categoryId)
-            database.leaderboardDao().deleteAll()
-            database.leaderboardDao().insertAll(lbItems.map { it.asLBItemDbModel(lbItems) })
+            try {
+                val lbItems = leaderboardApi.getLeaderboard(categoryId)
+                database.leaderboardDao().deleteAll()
+                database.leaderboardDao().insertAll(lbItems.map { it.asLBItemDbModel(lbItems) })
+            }catch (e: IOException){
+                Log.e("LEADERBOARD REPO", "Fetching from API failed")
+            }
+
         }
     }
 
